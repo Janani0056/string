@@ -1,0 +1,32 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        if (numRows == 1 || numRows >= s.length()) {
+            return s;
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for (int row = 0; row < numRows; row++) {
+            int index = row;
+            int step1 = 2 * (numRows - row - 1);
+            int step2 = 2 * row;
+
+            while (index < s.length()) {
+                result.append(s.charAt(index));
+
+                if (step1 > 0) {
+                    index += step1;
+                } else {
+                    index += step2;
+                }
+
+                if (step1 > 0 && step2 > 0 && index < s.length()) {
+                    result.append(s.charAt(index));
+                    index += step2;
+                }
+            }
+        }
+
+        return result.toString();
+    }
+}
